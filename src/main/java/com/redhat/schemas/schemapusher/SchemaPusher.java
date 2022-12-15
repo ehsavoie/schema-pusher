@@ -39,7 +39,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Option;
 
 /**
- *
+ * Simple class to deploy the schemas
  * @author ehsavoie
  */
 public class SchemaPusher implements Callable<Integer> {
@@ -107,6 +107,9 @@ public class SchemaPusher implements Callable<Integer> {
             Files.walkFileTree(rootPath, new FileVisitor<Path>() {
                 @Override
                 public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    if(dir.endsWith("test") || dir.endsWith("test-classes") || dir.endsWith("generated-test-resources")) {
+                        return FileVisitResult.SKIP_SUBTREE;
+                    }
                     return FileVisitResult.CONTINUE;
                 }
 
