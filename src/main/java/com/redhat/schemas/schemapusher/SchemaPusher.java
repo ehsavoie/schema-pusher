@@ -115,7 +115,7 @@ public class SchemaPusher implements Callable<Integer> {
                     String fileName = file.getFileName().toString();
                     if (Files.isRegularFile(file) && (fileName.endsWith(".xsd") || fileName.endsWith(".dtd"))) {
                         result.add(file);
-                        System.out.println("Local file: " + fileName);
+                        logger.atInfo().log("Local file: " + fileName);
                     }
                     return FileVisitResult.CONTINUE;
                 }
