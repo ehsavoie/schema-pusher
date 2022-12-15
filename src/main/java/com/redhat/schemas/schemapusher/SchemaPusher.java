@@ -7,7 +7,7 @@ package com.redhat.schemas.schemapusher;
 //DEPS org.bouncycastle:bcutil-jdk18on:1.72
 //DEPS org.slf4j:slf4j-api:2.0.5
 //DEPS org.slf4j:slf4j-reload4j:2.0.5
-//DEPS ch.qos.reload4j:reload4j:>1.2.24
+//DEPS ch.qos.reload4j:reload4j:1.2.24
 //JAVA 11
 
 import java.io.BufferedWriter;
@@ -78,7 +78,7 @@ public class SchemaPusher implements Callable<Integer> {
     public static void main(String[] args) throws Exception {
         logger.atInfo().log("Let's push some files !!!!");
         new CommandLine(new SchemaPusher()).execute(args);
-//        new CommandLine(new SchemaPusher()).execute("-ip", "--local-directory=/home/ehsavoie/tmp/schemas/jbossas");
+//        new CommandLine(new SchemaPusher()).execute("-ip", "--local-directory=/home/ehsavoie/dev/metadata");
     }
 
     private SSHClient setupSshj() throws IOException {
