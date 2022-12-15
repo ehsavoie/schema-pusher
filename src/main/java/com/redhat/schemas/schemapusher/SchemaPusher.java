@@ -157,10 +157,10 @@ public class SchemaPusher implements Callable<Integer> {
         try {
             Collection<Path> localFiles = listLocalFiles();
             sshClient = setupSshj();
-            SFTPClient sftpClient = sshClient.newSFTPClient();
-            Set<String> remoteFiles = listRemoteFiles(sftpClient);
-            uploadFiles(sftpClient, localFiles, remoteFiles);
-            sftpClient.close();
+            try (SFTPClient sftpClient = sshClient.newSFTPClient()) {
+                Set<String> remoteFiles = listRemoteFiles(sftpClient);
+                uploadFiles(sftpClient, localFiles, remoteFiles);
+            }
             return 0;
         } finally {
             if (sshClient != null) {
@@ -173,8 +173,8 @@ public class SchemaPusher implements Callable<Integer> {
         Set<String> uploadedFiles = new HashSet<>();
         for (Path localFile : localFiles) {
             String localFileName = localFile.getFileName().toString();
-            if (!remoteFiles.contains(localFileName)) {
-                System.out.println("Uploading file: " + localFile);
+            if (!remoteFiles.contains(localFileName) && !uploadedFiles.contains(localFileName)) {
+                logger.atInfo().log("Uploading file: " + localFile);
                 sftpClient.put(new FileSystemFile(localFile.toFile()), remoteDirectory + localFileName);
                 uploadedFiles.add(localFileName);
                 logger.atInfo().log("File " + localFileName + " uploaded");
