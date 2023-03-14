@@ -193,7 +193,12 @@ public class SchemaPusher implements Callable<Integer> {
 
     private File createIndex(List<String> files) throws IOException {
         Collections.sort(files);
-        Path index = localDirectory.toPath().resolve("index.html");
+        Path index;
+        if(localDirectory.isFile()) {
+            index = localDirectory.getParentFile().toPath().resolve("index.html");
+        } else {
+            index = localDirectory.toPath().resolve("index.html");
+        }
         Files.deleteIfExists(index);
         try (BufferedWriter writer
                 = Files.newBufferedWriter(index, StandardCharsets.UTF_8)) {
