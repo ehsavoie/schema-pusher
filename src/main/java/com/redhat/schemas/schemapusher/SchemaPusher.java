@@ -5,9 +5,8 @@ package com.redhat.schemas.schemapusher;
 //DEPS org.bouncycastle:bcpkix-jdk18on:1.72
 //DEPS org.bouncycastle:bcprov-jdk18on:1.72
 //DEPS org.bouncycastle:bcutil-jdk18on:1.72
-//DEPS org.slf4j:slf4j-api:2.0.5
-//DEPS org.slf4j:slf4j-reload4j:2.0.5
-//DEPS ch.qos.reload4j:reload4j:1.2.24
+//DEPS org.slf4j:slf4j-api:2.0.13
+//DEPS org.slf4j:slf4j-simple:2.0.13
 //JAVA 11
 
 import java.io.BufferedWriter;
@@ -18,6 +17,7 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,7 +68,6 @@ public class SchemaPusher implements Callable<Integer> {
     Exclusive exclusive;
 
     static class Exclusive {
-
         @Option(names = {"-p", "--password"}, description = "Passpword", interactive = true)
         char[] password;
         @Option(names = {"-ip", "--passphrase"}, description = "Passphrase", interactive = true)
@@ -201,7 +200,7 @@ public class SchemaPusher implements Callable<Integer> {
         }
         Files.deleteIfExists(index);
         try (BufferedWriter writer
-                = Files.newBufferedWriter(index, StandardCharsets.UTF_8)) {
+                = Files.newBufferedWriter(index, StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW)) {
             writer.append("<!DOCTYPE html>");
             writer.newLine();
             writer.append("<html>");
