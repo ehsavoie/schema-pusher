@@ -2,9 +2,9 @@ package com.redhat.schemas.schemapusher;
 
 //DEPS info.picocli:picocli:4.7.0
 //DEPS com.hierynomus:sshj:0.40.0
-//DEPS org.bouncycastle:bcpkix-jdk18on:1.81
-//DEPS org.bouncycastle:bcprov-jdk18on:1.81
-//DEPS org.bouncycastle:bcutil-jdk18on:1.81
+//DEPS org.bouncycastle:bcpkix-jdk18on:1.85
+//DEPS org.bouncycastle:bcprov-jdk18on:1.85
+//DEPS org.bouncycastle:bcutil-jdk18on:1.85
 //DEPS org.slf4j:slf4j-api:2.0.13
 //DEPS org.slf4j:slf4j-simple:2.0.13
 //JAVA 25
