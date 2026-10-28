@@ -1,13 +1,13 @@
 package com.redhat.schemas.schemapusher;
 
 //DEPS info.picocli:picocli:4.7.0
-//DEPS com.hierynomus:sshj:0.34.0
-//DEPS org.bouncycastle:bcpkix-jdk18on:1.72
-//DEPS org.bouncycastle:bcprov-jdk18on:1.72
-//DEPS org.bouncycastle:bcutil-jdk18on:1.72
+//DEPS com.hierynomus:sshj:0.40.0
+//DEPS org.bouncycastle:bcpkix-jdk18on:1.81
+//DEPS org.bouncycastle:bcprov-jdk18on:1.81
+//DEPS org.bouncycastle:bcutil-jdk18on:1.81
 //DEPS org.slf4j:slf4j-api:2.0.13
 //DEPS org.slf4j:slf4j-simple:2.0.13
-//JAVA 11
+//JAVA 25
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -52,7 +52,7 @@ public class SchemaPusher implements Callable<Integer> {
     @Option(names = {"-i", "--identity"}, description = "Private key", defaultValue = "~/.ssh/id_rsa")
     String privateKey;
 
-    @Option(names = {"-h", "--host"}, description = "Host", defaultValue = "filemgmt-prod.jboss.org")
+    @Option(names = {"-h", "--host"}, description = "Host", defaultValue = "filemgmt.jboss.org")
     String host;
 
     @Option(names = {"-n", "--port"}, description = "Port", defaultValue = "22")
